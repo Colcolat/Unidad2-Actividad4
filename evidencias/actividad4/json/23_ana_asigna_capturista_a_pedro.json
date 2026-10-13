@@ -1,0 +1,17 @@
+{
+  "data": {
+    "assignRole": {
+      "id": "36",
+      "role": {
+        "code": "CAPTURISTA"
+      },
+      "isActive": true,
+      "companyUser": {
+        "id": "20",
+        "user": {
+          "name": "Pedro"
+        }
+      }
+    }
+  }
+}

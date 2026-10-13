@@ -1,0 +1,11 @@
+{
+  "data": {
+    "assignRole": {
+      "id": "42",
+      "role": {
+        "code": "CONTADOR"
+      },
+      "isActive": true
+    }
+  }
+}

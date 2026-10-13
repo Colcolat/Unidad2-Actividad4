@@ -1,0 +1,37 @@
+{
+  "empresa_id": "4",
+  "cuenta_id": "13",
+  "concepto_id": "4",
+  "membresias": {
+    "Ana": "16",
+    "Luis": "17",
+    "Maria": "18",
+    "Jose": "19",
+    "Pedro": "20"
+  },
+  "correos": {
+    "Ana": "ana-55b0f870@ingresos.example.com",
+    "Luis": "luis-55b0f870@ingresos.example.com",
+    "Maria": "maria-55b0f870@ingresos.example.com",
+    "Jose": "jose-55b0f870@ingresos.example.com",
+    "Pedro": "pedro-55b0f870@ingresos.example.com"
+  },
+  "roles": {
+    "ADMINISTRADOR": "1",
+    "CONTADOR": "2",
+    "CAPTURISTA": "3",
+    "CONSULTA": "4"
+  },
+  "permisos": {
+    "company.users.read": "1",
+    "company.users.write": "2",
+    "accounts.read": "3",
+    "accounts.write": "4",
+    "concepts.read": "5",
+    "concepts.write": "6",
+    "transactions.read": "7",
+    "transactions.write": "8",
+    "roles.read": "9",
+    "roles.write": "10"
+  }
+}

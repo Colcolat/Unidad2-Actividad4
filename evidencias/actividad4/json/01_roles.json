@@ -1,0 +1,30 @@
+{
+  "data": {
+    "roles": [
+      {
+        "id": "1",
+        "code": "ADMINISTRADOR",
+        "name": "Administrador",
+        "isActive": true
+      },
+      {
+        "id": "2",
+        "code": "CONTADOR",
+        "name": "Contador",
+        "isActive": true
+      },
+      {
+        "id": "3",
+        "code": "CAPTURISTA",
+        "name": "Capturista",
+        "isActive": true
+      },
+      {
+        "id": "4",
+        "code": "CONSULTA",
+        "name": "Consulta",
+        "isActive": true
+      }
+    ]
+  }
+}

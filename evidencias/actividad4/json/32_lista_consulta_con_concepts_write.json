@@ -1,0 +1,51 @@
+{
+  "data": {
+    "rolePermissions": [
+      {
+        "role": {
+          "code": "CONSULTA"
+        },
+        "permission": {
+          "code": "company.users.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CONSULTA"
+        },
+        "permission": {
+          "code": "accounts.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CONSULTA"
+        },
+        "permission": {
+          "code": "concepts.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CONSULTA"
+        },
+        "permission": {
+          "code": "transactions.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CONSULTA"
+        },
+        "permission": {
+          "code": "concepts.write"
+        },
+        "isActive": true
+      }
+    ]
+  }
+}

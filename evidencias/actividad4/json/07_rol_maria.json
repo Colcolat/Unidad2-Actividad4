@@ -1,0 +1,11 @@
+{
+  "data": {
+    "assignRole": {
+      "id": "34",
+      "role": {
+        "code": "CAPTURISTA"
+      },
+      "isActive": true
+    }
+  }
+}

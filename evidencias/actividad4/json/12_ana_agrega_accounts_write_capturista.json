@@ -1,0 +1,14 @@
+{
+  "data": {
+    "assignPermissionToRole": {
+      "id": "27",
+      "role": {
+        "code": "CAPTURISTA"
+      },
+      "permission": {
+        "code": "accounts.write"
+      },
+      "isActive": true
+    }
+  }
+}

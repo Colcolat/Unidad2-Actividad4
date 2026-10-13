@@ -1,0 +1,9 @@
+{
+  "data": {
+    "createTransaction": {
+      "id": "4",
+      "amount": "250.00",
+      "transactionType": "INCOME"
+    }
+  }
+}

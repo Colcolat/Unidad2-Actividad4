@@ -1,0 +1,66 @@
+{
+  "data": {
+    "permissions": [
+      {
+        "id": "1",
+        "code": "company.users.read",
+        "name": "Consultar membresías",
+        "isActive": true
+      },
+      {
+        "id": "2",
+        "code": "company.users.write",
+        "name": "Administrar membresías",
+        "isActive": true
+      },
+      {
+        "id": "3",
+        "code": "accounts.read",
+        "name": "Consultar cuentas",
+        "isActive": true
+      },
+      {
+        "id": "4",
+        "code": "accounts.write",
+        "name": "Crear cuentas",
+        "isActive": true
+      },
+      {
+        "id": "5",
+        "code": "concepts.read",
+        "name": "Consultar conceptos",
+        "isActive": true
+      },
+      {
+        "id": "6",
+        "code": "concepts.write",
+        "name": "Administrar conceptos",
+        "isActive": true
+      },
+      {
+        "id": "7",
+        "code": "transactions.read",
+        "name": "Consultar movimientos",
+        "isActive": true
+      },
+      {
+        "id": "8",
+        "code": "transactions.write",
+        "name": "Registrar movimientos",
+        "isActive": true
+      },
+      {
+        "id": "9",
+        "code": "roles.read",
+        "name": "Consultar roles y permisos",
+        "isActive": true
+      },
+      {
+        "id": "10",
+        "code": "roles.write",
+        "name": "Administrar roles y permisos",
+        "isActive": true
+      }
+    ]
+  }
+}

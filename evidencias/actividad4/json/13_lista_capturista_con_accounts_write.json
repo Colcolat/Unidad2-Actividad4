@@ -1,0 +1,51 @@
+{
+  "data": {
+    "rolePermissions": [
+      {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "permission": {
+          "code": "accounts.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "permission": {
+          "code": "concepts.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "permission": {
+          "code": "transactions.read"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "permission": {
+          "code": "transactions.write"
+        },
+        "isActive": true
+      },
+      {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "permission": {
+          "code": "accounts.write"
+        },
+        "isActive": true
+      }
+    ]
+  }
+}

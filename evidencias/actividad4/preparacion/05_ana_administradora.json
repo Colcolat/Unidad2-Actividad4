@@ -1,0 +1,11 @@
+{
+  "data": {
+    "createCompanyAdmin": {
+      "id": "21",
+      "isAdmin": true,
+      "user": {
+        "name": "Ana"
+      }
+    }
+  }
+}

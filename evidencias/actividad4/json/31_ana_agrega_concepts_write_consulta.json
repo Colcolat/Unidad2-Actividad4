@@ -1,0 +1,14 @@
+{
+  "data": {
+    "assignPermissionToRole": {
+      "id": "28",
+      "role": {
+        "code": "CONSULTA"
+      },
+      "permission": {
+        "code": "concepts.write"
+      },
+      "isActive": true
+    }
+  }
+}

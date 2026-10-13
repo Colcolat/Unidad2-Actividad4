@@ -1,0 +1,11 @@
+{
+  "data": {
+    "createCompanyUser": {
+      "id": "24",
+      "isAdmin": false,
+      "user": {
+        "name": "Jose"
+      }
+    }
+  }
+}

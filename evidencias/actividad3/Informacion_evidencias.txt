@@ -1,0 +1,54 @@
+# Unidad II, Actividad 3, Evidencias de roles y permisos
+
+En estas evidencias se muestran las pruebas realizadas en GraphQL y MySQL para comprobar que los usuarios pueden realizar operaciones según el rol que tienen asignado.
+
+## Evidencia 01, Movimiento aceptado por capturista
+Se registra correctamente un movimiento de ingreso con el usuario capturista, ya que su rol tiene permiso para registrar movimientos.
+
+## Evidencia 02, Catálogo de permisos
+
+Se consulta el catálogo de permisos del sistema, con los diez códigos que se utilizan para controlar el acceso a las operaciones.
+
+## Evidencia 03, Permisos del capturista
+
+Se muestran los permisos del capturista, puede consultar cuentas y conceptos, además de consultar y registrar movimientos, pero no puede crear cuentas.
+
+## Evidencia 04, Permisos de consulta
+
+Se muestran los permisos del rol consulta, solamente tiene permisos de lectura y no puede realizar operaciones de escritura.
+
+## Evidencia 05, Rechazo del rol consulta
+
+Se muestra un rechazo al intentar realizar una operación sin el permiso necesario, el sistema impide continuar con una acción que no está autorizada para el rol consulta.
+
+## Evidencia 06, Movimiento rechazado para consulta
+
+Se intenta registrar un ingreso con el rol consulta, el sistema rechaza la operación porque no tiene el permiso transactions.write.
+
+## Evidencia 07, Asignación del rol capturista
+
+Se asigna el rol capturista a una membresía de la empresa, el sistema confirma que el nuevo rol queda activo.
+
+## Evidencia 08, Cuenta rechazada para capturista
+
+El capturista intenta crear una cuenta, el sistema rechaza la solicitud porque su rol no cuenta con el permiso accounts.write.
+
+## Evidencia 09, Cuenta creada por contador
+
+El contador registra una cuenta correctamente, esto demuestra que su rol tiene el permiso accounts.write.
+
+## Evidencia 10, Cambio de capturista a contador
+
+Se cambia el rol de un usuario de capturista a contador, el sistema deja activa la nueva asignación.
+
+## Evidencia 11, Cuenta creada después del cambio de rol
+
+El usuario que antes era capturista logra crear una cuenta después de recibir el rol contador, esto demuestra que sus permisos cambiaron con el nuevo rol.
+
+## Evidencia 12, Segundo administrador rechazado
+
+Se intenta registrar un segundo administrador principal en la misma empresa, el sistema rechaza la operación porque solamente puede existir uno.
+
+## Evidencia 13, Reinicio sin duplicar registros
+
+Después de reiniciar el servidor se comprueba en MySQL que siguen registrados cuatro roles, diez permisos y veintiséis relaciones activas, sin duplicar los datos iniciales.
