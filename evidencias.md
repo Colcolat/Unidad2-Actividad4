@@ -139,17 +139,20 @@ Regla demostrada: las reglas viven en Python (`plan_role_permissions`) y se revi
 
 ---
 
-## Capturas que se agregan en `evidencias/actividad5/capturas/`
+## Capturas
 
-| Archivo | Qué se ve |
+Están en `evidencias/actividad5/capturas/` y se tomaron con `documentacion/tomar_capturas_actividad5.py` en el mismo orden de los casos. Cada captura de GraphiQL muestra la operación copiada de `operaciones.graphql`, sus variables de `variables/` y la respuesta; el script revisa la respuesta antes de guardar la imagen. Las de MySQL son la salida real del cliente `mysql -t`, y la barra superior muestra la versión del servidor. En E10 el token se usó para ejecutar la petición y en la imagen aparece oculto.
+
+| Caso | Capturas |
 |---|---|
-| `E01_punto_de_partida.png`, `E01_mysql.png` | `PuntoDePartida` en GraphiQL y relaciones activas de CAPTURISTA en MySQL |
-| `E02_explorar_catalogo.png`, `E02_sin_filtro.png`, `E02_payments.png` | Operación con alias y fragmento, panel de variables, catálogo completo y error del enum |
-| `E03_revisar.png`, `E03_mysql_antes_despues.png` | Respuesta de la previsualización y SQL idéntico antes y después |
-| `E04_primera.png`, `E04_segunda.png`, `E04_mysql.png` | `changed: true`, `changed: false`, filas y duplicados |
-| `E05_s0.png`, `E05_s1.png`, `E05_mysql.png` | Relación de `accounts.write` con el mismo id en los tres momentos |
-| `E06_<variante>.png` | Variables y mensaje de cada variante; SQL antes y después |
-| `E07_unittest.png` | Salida de la prueba y consulta posterior |
-| `E08_vacia.png`, `E08_mysql_reinicio.png` | Lista vacía aplicada y filas inactivas después de reiniciar |
-| `E09_restauracion.png`, `E09_mysql.png` | Restauración de S0 y listas por rol |
-| `E10_cuentas.png`, `E10_movimiento.png`, `E10_mysql.png` | Consulta de cuentas, movimiento registrado y fila en MySQL |
+| E01 | `E01a_punto_de_partida`, `E01b_lista_capturista`, `E01c_configuracion_inicial`, `E01d_mysql_capturista` |
+| E02 | `E02a_explorar_catalogo` (alias, fragmento y variables), `E02b_catalogo_completo`, `E02c_catalogo_resource_null`, `E02d_payments_variable`, `E02e_payments_literal` |
+| Investigación | `I01_comparar_puestos` (operación propia) |
+| E03 | `E03a_mysql_antes`, `E03b_revisar_S1`, `E03c_mysql_despues` |
+| E04 | `E04a_aplicar_S1_primera`, `E04b_aplicar_S1_segunda`, `E04c_mysql_filas_y_duplicados` |
+| E05 | `E05a_mysql_accounts_write_activa`, `E05b_aplicar_S0`, `E05c_mysql_accounts_write_inactiva`, `E05d_aplicar_S1`, `E05e_mysql_accounts_write_reactivada` |
+| E06 | `E06a_mysql_antes`; por variante `E06<letra>1_<variante>_revisar` y `E06<letra>2_<variante>_aplicar` (b rol inexistente, c rol inactivo, d administrador, e permiso inexistente, f permiso inactivo, g permiso repetido, h mismo id texto y número, i actor sin roles.write); preparación y restauración SQL en `E06c0`, `E06c3`, `E06f0`, `E06f3`; `E06j_mysql_despues` |
+| E07 | `E07a_unittest`, `E07b_mysql_sesion_nueva` |
+| E08 | `E08a_aplicar_lista_vacia`, `E08b_mysql_antes_reinicio`, `E08c_mysql_despues_reinicio`, `E08d_lista_capturista_tras_reinicio` |
+| E09 | `E09a_aplicar_S0`, `E09b_comparar_configuraciones`, `E09c_mysql_listas_por_rol` |
+| E10 | `E10a_cuentas`, `E10b_registrar_movimiento`, `E10c_mysql_movimiento` |

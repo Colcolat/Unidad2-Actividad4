@@ -83,6 +83,20 @@ que termina E08 y ejecuta E09 y E10. Respuestas en `evidencias/actividad5/json/`
 
 El script parte de CAPTURISTA en S0 y lo deja otra vez en S0, así que se puede volver a correr.
 
+## Tomar las capturas
+
+Después de correr las dos partes de `probar_actividad5.py`, con la API activa:
+
+```bash
+pip install playwright        # solo para las capturas
+python -m playwright install chromium
+python documentacion/tomar_capturas_actividad5.py principal
+# reiniciar uvicorn
+python documentacion/tomar_capturas_actividad5.py reinicio
+```
+
+Ejecuta cada caso en GraphiQL con las operaciones de `operaciones.graphql` y las variables de `variables/`, y toma la salida real del cliente `mysql` del contenedor `actividad4_mysql`. Las imágenes quedan en `evidencias/actividad5/capturas/`. Si MySQL no corre en Docker, el cliente se indica con `MYSQL_CMD` (ver el encabezado del script).
+
 ## Correr la prueba E07
 
 Con MySQL activo (la API no es necesaria):
@@ -131,6 +145,7 @@ evidencias.md                E01 a E10: precondición, operación, esperado, obt
 evidencias/actividad5/       JSON, SQL, salida de E07 y capturas
 documentacion/
   probar_actividad5.py       ejecuta E01 a E10
+  tomar_capturas_actividad5.py  toma las capturas de E01 a E10
   probar_actividad4.py, tomar_capturas.py, PRUEBAS_GRAPHQL.md, ANALISIS.md, anteriores/
 evidencias/actividad4/       evidencias de la actividad 4
 ```
