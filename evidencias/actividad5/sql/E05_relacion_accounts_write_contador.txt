@@ -1,0 +1,11 @@
+mysql> SELECT rp.id AS relacion_id, r.code AS rol, rp.is_active AS relacion_activa, p.is_active AS permiso_activo
+FROM role_permissions rp JOIN roles r ON r.id = rp.role_id JOIN permissions p ON p.id = rp.permission_id
+WHERE p.code = 'accounts.write' ORDER BY r.code;
++-------------+---------------+-----------------+----------------+
+| relacion_id | rol           | relacion_activa | permiso_activo |
++-------------+---------------+-----------------+----------------+
+| 4           | ADMINISTRADOR | 1               | 1              |
+| 27          | CAPTURISTA    | 1               | 1              |
+| 13          | CONTADOR      | 1               | 1              |
++-------------+---------------+-----------------+----------------+
+3 rows in set

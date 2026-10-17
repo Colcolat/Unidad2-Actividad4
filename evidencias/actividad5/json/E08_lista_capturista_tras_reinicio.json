@@ -1,0 +1,9 @@
+{
+  "operacion": "ListaDelRol",
+  "variables": "variables/E01_lista_capturista.json",
+  "respuesta": {
+    "data": {
+      "rolePermissions": []
+    }
+  }
+}

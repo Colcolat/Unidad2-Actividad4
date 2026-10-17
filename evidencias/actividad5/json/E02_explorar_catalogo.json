@@ -1,0 +1,32 @@
+{
+  "operacion": "ExplorarCatalogo",
+  "variables": "variables/E02_actor.json",
+  "respuesta": {
+    "data": {
+      "cuentas": [
+        {
+          "id": "3",
+          "code": "accounts.read",
+          "name": "Consultar cuentas"
+        },
+        {
+          "id": "4",
+          "code": "accounts.write",
+          "name": "Crear cuentas"
+        }
+      ],
+      "movimientos": [
+        {
+          "id": "7",
+          "code": "transactions.read",
+          "name": "Consultar movimientos"
+        },
+        {
+          "id": "8",
+          "code": "transactions.write",
+          "name": "Registrar movimientos"
+        }
+      ]
+    }
+  }
+}

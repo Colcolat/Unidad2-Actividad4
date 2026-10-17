@@ -1,0 +1,10 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "createAccount": {
+        "id": "7"
+      }
+    }
+  }
+}

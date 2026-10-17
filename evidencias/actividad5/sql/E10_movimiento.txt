@@ -1,0 +1,14 @@
+mysql> SELECT t.id AS movimiento_id, c.name AS empresa, a.name AS cuenta, k.name AS concepto,
+       t.transaction_type AS tipo, t.amount AS monto, u.name AS capturo
+FROM transactions t
+JOIN accounts a ON a.id = t.account_id
+JOIN concepts k ON k.id = t.concept_id
+JOIN companies c ON c.id = a.company_id
+JOIN users u ON u.id = t.captured_by
+WHERE t.id = 3;
++---------------+-----------------------------------------+--------------+---------------------+--------+--------+---------+
+| movimiento_id | empresa                                 | cuenta       | concepto            | tipo   | monto  | capturo |
++---------------+-----------------------------------------+--------------+---------------------+--------+--------+---------+
+| 3             | Sistema General de Ingresos A5 0f4d9543 | Caja general | Ventas de mostrador | INCOME | 350.00 | María   |
++---------------+-----------------------------------------+--------------+---------------------+--------+--------+---------+
+1 rows in set

@@ -1,0 +1,7 @@
+$ python -m unittest -v tests.test_e07_reversion
+test_fallo_despues_del_flush_revierte_toda_la_lista (tests.test_e07_reversion.E07ReversionTest.test_fallo_despues_del_flush_revierte_toda_la_lista) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.164s
+
+OK

@@ -1,0 +1,64 @@
+[
+  {
+    "variante": "rol_inexistente",
+    "variables": "variables/E06_rol_inexistente.json",
+    "preparacion": null,
+    "mensaje": "El rol 999999 no existe.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "rol_inactivo",
+    "variables": "variables/E06_rol_inactivo.json",
+    "preparacion": [
+      "UPDATE roles SET is_active = 0 WHERE code = 'CONSULTA'",
+      "UPDATE roles SET is_active = 1 WHERE code = 'CONSULTA'"
+    ],
+    "mensaje": "El rol CONSULTA está inactivo.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "administrador",
+    "variables": "variables/E06_administrador.json",
+    "preparacion": null,
+    "mensaje": "La lista del rol ADMINISTRADOR no se configura con esta operación.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "permiso_inexistente",
+    "variables": "variables/E06_permiso_inexistente.json",
+    "preparacion": null,
+    "mensaje": "Los permisos 999999 no existen.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "permiso_inactivo",
+    "variables": "variables/E06_permiso_inactivo.json",
+    "preparacion": [
+      "UPDATE permissions SET is_active = 0 WHERE code = 'concepts.write'",
+      "UPDATE permissions SET is_active = 1 WHERE code = 'concepts.write'"
+    ],
+    "mensaje": "Los permisos concepts.write están inactivos en el catálogo.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "permiso_repetido",
+    "variables": "variables/E06_permiso_repetido.json",
+    "preparacion": null,
+    "mensaje": "El permiso 3 viene repetido en la lista. Cada permiso se envía una sola vez.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "mismo_id_texto_y_numero",
+    "variables": "variables/E06_mismo_id_texto_y_numero.json",
+    "preparacion": null,
+    "mensaje": "El permiso 3 viene repetido en la lista. Cada permiso se envía una sola vez.",
+    "relaciones_sin_cambio": true
+  },
+  {
+    "variante": "actor_sin_roles_write",
+    "variables": "variables/E06_actor_sin_roles_write.json",
+    "preparacion": null,
+    "mensaje": "El rol no tiene el permiso roles.write.",
+    "relaciones_sin_cambio": true
+  }
+]

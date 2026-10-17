@@ -1,0 +1,66 @@
+{
+  "operacion": "ListaDelRol",
+  "variables": null,
+  "respuesta": {
+    "data": {
+      "rolePermissions": [
+        {
+          "id": "11",
+          "permission": {
+            "code": "company.users.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "12",
+          "permission": {
+            "code": "accounts.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "13",
+          "permission": {
+            "code": "accounts.write"
+          },
+          "isActive": true
+        },
+        {
+          "id": "14",
+          "permission": {
+            "code": "concepts.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "15",
+          "permission": {
+            "code": "concepts.write"
+          },
+          "isActive": true
+        },
+        {
+          "id": "16",
+          "permission": {
+            "code": "transactions.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "17",
+          "permission": {
+            "code": "transactions.write"
+          },
+          "isActive": true
+        },
+        {
+          "id": "18",
+          "permission": {
+            "code": "roles.read"
+          },
+          "isActive": true
+        }
+      ]
+    }
+  }
+}

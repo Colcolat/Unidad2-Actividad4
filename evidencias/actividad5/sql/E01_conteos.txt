@@ -1,0 +1,10 @@
+mysql> SELECT (SELECT COUNT(*) FROM roles) AS roles,
+       (SELECT COUNT(*) FROM permissions) AS permisos,
+       (SELECT COUNT(*) FROM role_permissions) AS relaciones,
+       (SELECT COUNT(*) FROM role_permissions WHERE is_active = 1) AS relaciones_activas;
++-------+----------+------------+--------------------+
+| roles | permisos | relaciones | relaciones_activas |
++-------+----------+------------+--------------------+
+| 4     | 10       | 28         | 26                 |
++-------+----------+------------+--------------------+
+1 rows in set

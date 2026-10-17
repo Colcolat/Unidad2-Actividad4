@@ -1,0 +1,23 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E06_rol_inactivo.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "El rol CONSULTA está inactivo.",
+        "locations": [
+          {
+            "line": 109,
+            "column": 3
+          }
+        ],
+        "path": [
+          "setRolePermissions"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "empresa": "8",
+  "empresa_nombre": "Sistema General de Ingresos A5 0f4d9543",
+  "ana": "14",
+  "maria": "15",
+  "correo_maria": "maria-0f4d9543@ingresos.example.com",
+  "cuenta": "7",
+  "concepto": "4",
+  "roles": {
+    "ADMINISTRADOR": "1",
+    "CONTADOR": "2",
+    "CAPTURISTA": "3",
+    "CONSULTA": "4"
+  },
+  "permisos": {
+    "company.users.read": "1",
+    "company.users.write": "2",
+    "accounts.read": "3",
+    "accounts.write": "4",
+    "concepts.read": "5",
+    "concepts.write": "6",
+    "transactions.read": "7",
+    "transactions.write": "8",
+    "roles.read": "9",
+    "roles.write": "10"
+  },
+  "E08_filas_antes_reinicio": [
+    [
+      19,
+      3,
+      "accounts.read",
+      0,
+      1
+    ],
+    [
+      27,
+      4,
+      "accounts.write",
+      0,
+      1
+    ],
+    [
+      20,
+      5,
+      "concepts.read",
+      0,
+      1
+    ],
+    [
+      21,
+      7,
+      "transactions.read",
+      0,
+      1
+    ],
+    [
+      22,
+      8,
+      "transactions.write",
+      0,
+      1
+    ]
+  ]
+}

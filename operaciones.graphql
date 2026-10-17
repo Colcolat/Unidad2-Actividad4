@@ -1,0 +1,148 @@
+# Unidad II · Actividad 5 · Operaciones reproducibles
+#
+# Cada operación tiene nombre. En GraphiQL se pega el archivo completo, se pegan las variables
+# del archivo de variables/ que indica el README y se elige la operación con el botón de ejecutar.
+# Guardar varias operaciones aquí no significa ejecutarlas juntas: cada una es una petición.
+
+fragment DatosPermiso on Permission {
+  id
+  code
+  name
+}
+
+# ---------- E01. Punto de partida ----------
+
+query PuntoDePartida {
+  roles {
+    id
+    code
+    name
+    isActive
+  }
+  permissions {
+    id
+    code
+    isActive
+  }
+}
+
+# Lista activa de un rol (operación de la actividad 4).
+query ListaDelRol($roleId: ID!) {
+  rolePermissions(roleId: $roleId) {
+    id
+    permission {
+      code
+    }
+    isActive
+  }
+}
+
+# ---------- E02. Catálogo filtrado ----------
+
+# Dos alias sobre el mismo campo y un fragmento: la respuesta trae "cuentas" y "movimientos".
+query ExplorarCatalogo($actor: ID!) {
+  cuentas: permissionCatalog(resource: ACCOUNTS, actorCompanyUserId: $actor) {
+    ...DatosPermiso
+  }
+  movimientos: permissionCatalog(
+    resource: TRANSACTIONS
+    actorCompanyUserId: $actor
+  ) {
+    ...DatosPermiso
+  }
+}
+
+# Sin "resource" (o con resource: null) devuelve todo el catálogo activo.
+query CatalogoCompleto($actor: ID!) {
+  catalogo: permissionCatalog(actorCompanyUserId: $actor) {
+    ...DatosPermiso
+  }
+}
+
+# El recurso llega como variable. Con {"resource": "PAYMENTS"} GraphQL rechaza la petición
+# antes de llegar al resolver, porque PAYMENTS no es un valor del enum PermissionResource.
+query CatalogoPorRecurso($actor: ID!, $resource: PermissionResource) {
+  catalogo: permissionCatalog(actorCompanyUserId: $actor, resource: $resource) {
+    ...DatosPermiso
+  }
+}
+
+# Operación propia (investigacion.md, apartado 2): compara dos puestos en una sola petición.
+# Dos alias sobre rolePermissions y el mismo fragmento para los datos del permiso.
+query CompararPuestos($capturista: ID!, $contador: ID!) {
+  capturista: rolePermissions(roleId: $capturista) {
+    permission {
+      ...DatosPermiso
+    }
+  }
+  contador: rolePermissions(roleId: $contador) {
+    permission {
+      ...DatosPermiso
+    }
+  }
+}
+
+# ---------- E03 a E09. Previsualizar y aplicar ----------
+
+query RevisarConfiguracion($actor: ID!, $input: SetRolePermissionsInput!) {
+  previewRolePermissions(input: $input, actorCompanyUserId: $actor) {
+    role {
+      code
+    }
+    current {
+      code
+    }
+    toActivate {
+      code
+    }
+    toDeactivate {
+      code
+    }
+    unchanged {
+      code
+    }
+    finalCount
+  }
+}
+
+mutation AplicarConfiguracion($actor: ID!, $input: SetRolePermissionsInput!) {
+  setRolePermissions(input: $input, actorCompanyUserId: $actor) {
+    role {
+      code
+    }
+    activated {
+      code
+    }
+    deactivated {
+      code
+    }
+    unchanged {
+      code
+    }
+    finalCount
+    changed
+  }
+}
+
+# ---------- E10. Continuidad del proyecto ----------
+
+query CuentasDeLaEmpresa($actor: ID!, $companyId: ID!) {
+  accounts(actorCompanyUserId: $actor, companyId: $companyId) {
+    id
+    name
+    accountType
+    companyId
+  }
+}
+
+# Además de las variables necesita el encabezado Authorization: Bearer <token de quien registra>.
+mutation RegistrarMovimiento($actor: ID!, $input: CreateTransactionInput!) {
+  createTransaction(actorCompanyUserId: $actor, input: $input) {
+    id
+    amount
+    transactionType
+    accountId
+    conceptId
+    capturedBy
+  }
+}

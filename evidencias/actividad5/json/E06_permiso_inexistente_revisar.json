@@ -1,0 +1,23 @@
+{
+  "operacion": "RevisarConfiguracion",
+  "variables": "variables/E06_permiso_inexistente.json",
+  "respuesta": {
+    "data": {
+      "previewRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "Los permisos 999999 no existen.",
+        "locations": [
+          {
+            "line": 88,
+            "column": 3
+          }
+        ],
+        "path": [
+          "previewRolePermissions"
+        ]
+      }
+    ]
+  }
+}

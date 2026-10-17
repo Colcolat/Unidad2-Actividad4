@@ -1,0 +1,20 @@
+{
+  "operacion": "CatalogoPorRecurso",
+  "variables": "variables/E02_resource_company_users.json",
+  "respuesta": {
+    "data": {
+      "catalogo": [
+        {
+          "id": "1",
+          "code": "company.users.read",
+          "name": "Consultar membresías"
+        },
+        {
+          "id": "2",
+          "code": "company.users.write",
+          "name": "Administrar membresías"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "operacion": "RegistrarMovimiento",
+  "variables": "variables/E10_movimiento.json",
+  "respuesta": {
+    "data": {
+      "createTransaction": {
+        "id": "3",
+        "amount": "350.00",
+        "transactionType": "INCOME",
+        "accountId": "7",
+        "conceptId": "4",
+        "capturedBy": "15"
+      }
+    }
+  }
+}

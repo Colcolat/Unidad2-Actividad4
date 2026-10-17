@@ -1,0 +1,10 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "login": {
+        "token": "OCULTO"
+      }
+    }
+  }
+}

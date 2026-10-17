@@ -1,0 +1,23 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E06_actor_sin_roles_write.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "El rol no tiene el permiso roles.write.",
+        "locations": [
+          {
+            "line": 109,
+            "column": 3
+          }
+        ],
+        "path": [
+          "setRolePermissions"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "operacion": "RevisarConfiguracion",
+  "variables": "variables/E06_actor_sin_roles_write.json",
+  "respuesta": {
+    "data": {
+      "previewRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "El rol no tiene el permiso roles.read.",
+        "locations": [
+          {
+            "line": 88,
+            "column": 3
+          }
+        ],
+        "path": [
+          "previewRolePermissions"
+        ]
+      }
+    ]
+  }
+}

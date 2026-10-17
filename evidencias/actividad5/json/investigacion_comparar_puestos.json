@@ -1,0 +1,96 @@
+{
+  "operacion": "CompararPuestos",
+  "variables": "variables/comparar_puestos.json",
+  "respuesta": {
+    "data": {
+      "capturista": [
+        {
+          "permission": {
+            "id": "3",
+            "code": "accounts.read",
+            "name": "Consultar cuentas"
+          }
+        },
+        {
+          "permission": {
+            "id": "5",
+            "code": "concepts.read",
+            "name": "Consultar conceptos"
+          }
+        },
+        {
+          "permission": {
+            "id": "7",
+            "code": "transactions.read",
+            "name": "Consultar movimientos"
+          }
+        },
+        {
+          "permission": {
+            "id": "8",
+            "code": "transactions.write",
+            "name": "Registrar movimientos"
+          }
+        }
+      ],
+      "contador": [
+        {
+          "permission": {
+            "id": "1",
+            "code": "company.users.read",
+            "name": "Consultar membresías"
+          }
+        },
+        {
+          "permission": {
+            "id": "3",
+            "code": "accounts.read",
+            "name": "Consultar cuentas"
+          }
+        },
+        {
+          "permission": {
+            "id": "4",
+            "code": "accounts.write",
+            "name": "Crear cuentas"
+          }
+        },
+        {
+          "permission": {
+            "id": "5",
+            "code": "concepts.read",
+            "name": "Consultar conceptos"
+          }
+        },
+        {
+          "permission": {
+            "id": "6",
+            "code": "concepts.write",
+            "name": "Administrar conceptos"
+          }
+        },
+        {
+          "permission": {
+            "id": "7",
+            "code": "transactions.read",
+            "name": "Consultar movimientos"
+          }
+        },
+        {
+          "permission": {
+            "id": "8",
+            "code": "transactions.write",
+            "name": "Registrar movimientos"
+          }
+        },
+        {
+          "permission": {
+            "id": "9",
+            "code": "roles.read",
+            "name": "Consultar roles y permisos"
+          }
+        }
+      ]
+    }
+  }
+}

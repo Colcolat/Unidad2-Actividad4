@@ -1,0 +1,60 @@
+{
+  "operacion": "CatalogoCompleto",
+  "variables": "variables/E02_actor.json",
+  "respuesta": {
+    "data": {
+      "catalogo": [
+        {
+          "id": "3",
+          "code": "accounts.read",
+          "name": "Consultar cuentas"
+        },
+        {
+          "id": "4",
+          "code": "accounts.write",
+          "name": "Crear cuentas"
+        },
+        {
+          "id": "1",
+          "code": "company.users.read",
+          "name": "Consultar membresías"
+        },
+        {
+          "id": "2",
+          "code": "company.users.write",
+          "name": "Administrar membresías"
+        },
+        {
+          "id": "5",
+          "code": "concepts.read",
+          "name": "Consultar conceptos"
+        },
+        {
+          "id": "6",
+          "code": "concepts.write",
+          "name": "Administrar conceptos"
+        },
+        {
+          "id": "9",
+          "code": "roles.read",
+          "name": "Consultar roles y permisos"
+        },
+        {
+          "id": "10",
+          "code": "roles.write",
+          "name": "Administrar roles y permisos"
+        },
+        {
+          "id": "7",
+          "code": "transactions.read",
+          "name": "Consultar movimientos"
+        },
+        {
+          "id": "8",
+          "code": "transactions.write",
+          "name": "Registrar movimientos"
+        }
+      ]
+    }
+  }
+}

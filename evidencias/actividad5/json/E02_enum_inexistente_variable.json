@@ -1,0 +1,18 @@
+{
+  "operacion": "CatalogoPorRecurso",
+  "variables": "variables/E02_resource_payments.json",
+  "respuesta": {
+    "data": null,
+    "errors": [
+      {
+        "message": "Variable '$resource' has invalid value: Value 'PAYMENTS' does not exist in 'PermissionResource' enum.",
+        "locations": [
+          {
+            "line": 64,
+            "column": 39
+          }
+        ]
+      }
+    ]
+  }
+}

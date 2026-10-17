@@ -1,0 +1,8 @@
+mysql> SELECT 'rol' AS tipo, code, is_active FROM roles WHERE code = 'CONSULTA' UNION ALL SELECT 'permiso', code, is_active FROM permissions WHERE code = 'concepts.write';
++---------+----------------+-----------+
+| tipo    | code           | is_active |
++---------+----------------+-----------+
+| rol     | CONSULTA       | 1         |
+| permiso | concepts.write | 1         |
++---------+----------------+-----------+
+2 rows in set

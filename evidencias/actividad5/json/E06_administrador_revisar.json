@@ -1,0 +1,23 @@
+{
+  "operacion": "RevisarConfiguracion",
+  "variables": "variables/E06_administrador.json",
+  "respuesta": {
+    "data": {
+      "previewRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "La lista del rol ADMINISTRADOR no se configura con esta operación.",
+        "locations": [
+          {
+            "line": 88,
+            "column": 3
+          }
+        ],
+        "path": [
+          "previewRolePermissions"
+        ]
+      }
+    ]
+  }
+}

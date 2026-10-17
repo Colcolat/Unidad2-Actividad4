@@ -1,0 +1,11 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "createCompanyAdmin": {
+        "id": "14",
+        "isAdmin": true
+      }
+    }
+  }
+}

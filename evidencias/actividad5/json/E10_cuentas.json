@@ -1,0 +1,16 @@
+{
+  "operacion": "CuentasDeLaEmpresa",
+  "variables": "variables/E10_cuentas.json",
+  "respuesta": {
+    "data": {
+      "accounts": [
+        {
+          "id": "7",
+          "name": "Caja general",
+          "accountType": "CASH",
+          "companyId": "8"
+        }
+      ]
+    }
+  }
+}

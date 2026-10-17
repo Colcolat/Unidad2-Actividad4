@@ -1,0 +1,38 @@
+{
+  "operacion": "ListaDelRol",
+  "variables": null,
+  "respuesta": {
+    "data": {
+      "rolePermissions": [
+        {
+          "id": "19",
+          "permission": {
+            "code": "accounts.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "20",
+          "permission": {
+            "code": "concepts.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "21",
+          "permission": {
+            "code": "transactions.read"
+          },
+          "isActive": true
+        },
+        {
+          "id": "22",
+          "permission": {
+            "code": "transactions.write"
+          },
+          "isActive": true
+        }
+      ]
+    }
+  }
+}

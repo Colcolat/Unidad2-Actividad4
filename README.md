@@ -1,106 +1,136 @@
-# Unidad II · Actividad 4: Configuración de permisos para diferentes roles
+# Unidad II · Actividad 5: Configurar permisos con GraphQL
 
-Sistema General de Ingresos. Es el mismo proyecto de la actividad 3 (FastAPI, Strawberry GraphQL, SQLAlchemy y MySQL con Docker Compose). Aquí no se agregaron tablas ni columnas: se usan `roles`, `permissions`, `role_permissions` y `company_user_roles` para configurar qué puede hacer cada puesto y demostrar que el servidor obedece esa configuración.
+Sistema General de Ingresos (FastAPI, Strawberry GraphQL, SQLAlchemy y MySQL con Docker Compose). Continúa la actividad 4 y agrega tres funcionalidades sobre la relación rol-permiso:
 
-## Dónde vive cada pieza
+1. **Catálogo filtrado** `permissionCatalog(actorCompanyUserId, resource)`: permisos activos, todos o de un recurso.
+2. **Previsualización** `previewRolePermissions(input, actorCompanyUserId)`: compara la lista deseada con la activa sin modificar filas.
+3. **Actualización completa** `setRolePermissions(input, actorCompanyUserId)`: deja exactamente la lista recibida en una sola transacción; repetirla devuelve `changed: false`.
 
-| Pieza | Dónde vive |
+La autenticación no cambia: `login` y el token siguen como en las actividades anteriores. `actorCompanyUserId` sigue siendo el dato de laboratorio para practicar la autorización con `exigir_permiso`; no autentica a nadie.
+
+## Integrantes y aportaciones
+
+| Integrante | Aportación |
 |---|---|
-| Usuario | `users` (`User`) |
-| Su lugar en una empresa | `company_users` (`CompanyUser`) |
-| El puesto de ese lugar | `company_user_roles`, con un solo rol activo por membresía |
-| La lista de acciones de cada puesto | `role_permissions`. Quitar un permiso pone `is_active = 0`; la fila no se borra |
-| La decisión | `exigir_permiso` en `app/rbac.py`, que corre antes de cualquier `commit` |
+| _Nombre 1_ | _p. ej. contrato GraphQL y resolvers_ |
+| _Nombre 2_ | _p. ej. prueba E07 y comprobaciones SQL_ |
+| _Nombre 3_ | _p. ej. investigación y evidencias_ |
 
-## Configuración que debe existir al empezar y al terminar
+## Qué cambió en el código
 
-| Permiso | Administrador | Contador | Capturista | Consulta |
-|---|:-:|:-:|:-:|:-:|
-| company.users.read | sí | sí | no | sí |
-| company.users.write | sí | no | no | no |
-| accounts.read | sí | sí | sí | sí |
-| accounts.write | sí | sí | no | no |
-| concepts.read | sí | sí | sí | sí |
-| concepts.write | sí | sí | no | no |
-| transactions.read | sí | sí | sí | sí |
-| transactions.write | sí | sí | sí | no |
-| roles.read | sí | sí | no | no |
-| roles.write | sí | no | no | no |
+| Archivo | Cambio |
+|---|---|
+| `app/schema.py` | Enum `PermissionResource`, input `SetRolePermissionsInput`, tipos `RolePermissionPlan` y `RolePermissionUpdate`; consultas `permissionCatalog` y `previewRolePermissions`; mutación `setRolePermissions`. `Role` y `Permission` se reutilizan. |
+| `app/rbac.py` | `plan_role_permissions` (valida y calcula, solo lee), compartida por la previsualización y la mutación; `apply_role_permission_plan` (escribe y hace `flush`, sin `commit`); `RESOURCE_PREFIXES`; `parse_id`. `seed_rbac` ahora solo carga la matriz si el rol no tiene **ninguna** fila, así una lista vacía aplicada a propósito no se repone al reiniciar. |
+| `tests/test_e07_reversion.py` | Prueba E07 con `unittest`. |
 
-Son 26 parejas activas: 10, 8, 4 y 4. El arranque (`seed_rbac`) carga la lista solo si un rol está vacío, así que reiniciar no duplica roles, permisos ni parejas, y tampoco reactiva permisos que se quitaron a propósito.
+No se agregaron tablas ni columnas: `role_permissions` ya tenía la restricción única `uq_role_permission (role_id, permission_id)`, así que no hace falta migración. Se conservan los cuatro roles, los diez permisos y la operación `permissions`.
 
-## Arranque
+### Permisos que exigen las operaciones nuevas
+
+| Operación | Tipo | Permiso |
+|---|---|---|
+| `permissionCatalog` | query | `roles.read` |
+| `previewRolePermissions` | query | `roles.read` |
+| `setRolePermissions` | mutation | `roles.write` |
+
+### Reglas de previsualizar y aplicar
+
+El rol debe existir y estar activo; no puede ser ADMINISTRADOR (regla del laboratorio). Cada id debe ser válido, existir y ser un permiso activo. Los ids repetidos se rechazan (`"3"` y `3` son el mismo). `[]` es válida y desactiva todas las relaciones activas del rol. Una pareja inactiva se reactiva con el mismo id de relación. Si una regla falla, el campo raíz vuelve `null`, el motivo llega en `errors` y no cambia ninguna relación. Las listas de resultados se ordenan por `Permission.code`.
+
+## Dependencias
+
+Python 3.11 o superior, Docker (MySQL 8.4) y los paquetes de `requirements.txt`: fastapi, uvicorn, strawberry-graphql, sqlalchemy, pymysql, python-dotenv, pydantic, pwdlib[argon2] y pyjwt.
+
+## Arranque de MySQL y de la API
 
 ```bash
 docker compose up -d
 ```
 
-Si el contenedor `actividad4_mysql` ya existe de las actividades anteriores, basta con `docker start actividad4_mysql`.
+Si el contenedor `actividad4_mysql` ya existe de las actividades anteriores: `docker start actividad4_mysql`.
 
 ```bash
 python -m venv .venv
-```
-
-Se activa el entorno (`.venv\Scripts\activate` en Windows, `source .venv/bin/activate` en Linux o macOS) y se instala lo necesario:
-
-```bash
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-Se copia `.env.example` a `.env`, se pone una `SECRET_KEY` y se arranca el servidor:
-
-```bash
 uvicorn app.main:app --reload
 ```
 
-GraphiQL queda en `http://127.0.0.1:8000/graphql`.
+Opcionalmente se crea un `.env` con `DATABASE_URL` y `SECRET_KEY` (sin subirlo al repositorio). Sin `.env` se usan los valores de `docker-compose.yml`.
 
-## Pruebas
-
-Con el servidor activo, en otra terminal:
+GraphiQL queda en `http://127.0.0.1:8000/graphql`. Cliente de MySQL:
 
 ```bash
-python documentacion/probar_actividad4.py
+docker exec -it actividad4_mysql mysql -uactividad4 -pactividad4 actividad4_db
 ```
 
-Crea una empresa nueva con Ana (ADMINISTRADOR), Luis (CONTADOR), María y José (CAPTURISTA) y Pedro (CONSULTA) y recorre las cuatro partes de la actividad. Además de la respuesta de GraphQL, revisa MySQL directamente: que un rechazo no guarde la fila, que la pareja quitada quede inactiva y no borrada, que Pedro tenga un solo rol activo y que el intento de José no cambie la lista. Al final comprueba que la lista vuelve a coincidir con la tabla de arriba. Las respuestas quedan en `evidencias/actividad4/json/` y el SELECT final en `evidencias/actividad4/select_role_permissions.txt`.
+## Preparar los datos y ejecutar los casos E01 a E10
 
-Para tomar las capturas en GraphiQL:
+Con la API activa, en otra terminal:
 
 ```bash
-python documentacion/probar_actividad4.py --preparar
+python documentacion/probar_actividad5.py
 ```
 
-Solo crea la empresa y las cinco personas, y escribe `evidencias/actividad4/guia_capturas.md` con cada consulta ya lista para pegar, con los id de esa empresa. La plantilla de esa guía es [documentacion/PRUEBAS_GRAPHQL.md](documentacion/PRUEBAS_GRAPHQL.md).
+Crea una empresa nueva con Ana (ADMINISTRADOR) y María (CAPTURISTA), con una cuenta y un concepto, y ejecuta E01 a E08 con las operaciones de `operaciones.graphql`. Escribe en `variables/` el JSON real de cada operación con los id de **tu** base. Al terminar pide reiniciar la API (E08): se detiene `uvicorn` con Ctrl+C, se vuelve a arrancar y se ejecuta:
 
-`documentacion/tomar_capturas.py` puede tomar esas capturas automáticamente con Chrome y Playwright (`pip install playwright`). Las capturas van en `evidencias/actividad4/capturas/` y la frase de cada una está en [evidencias/actividad4/Informacion_evidencias.md](evidencias/actividad4/Informacion_evidencias.md).
+```bash
+python documentacion/probar_actividad5.py --despues-reinicio
+```
 
-## Operaciones GraphQL que se usan
+que termina E08 y ejecuta E09 y E10. Respuestas en `evidencias/actividad5/json/`, consultas SQL en `evidencias/actividad5/sql/`; `configuracion_final.json` se genera en E09. La explicación de cada caso está en [evidencias.md](evidencias.md).
 
-| Qué se quiere hacer | GraphQL | Permiso que exige |
+El script parte de CAPTURISTA en S0 y lo deja otra vez en S0, así que se puede volver a correr.
+
+## Correr la prueba E07
+
+Con MySQL activo (la API no es necesaria):
+
+```bash
+python -m unittest -v tests.test_e07_reversion
+```
+
+o todas las pruebas con `python -m unittest discover -v`. La prueba crea su propia empresa con una administradora, reemplaza temporalmente con `mock.patch` la función que aplica el plan para que lance una excepción después del `flush` y antes del `commit`, y comprueba desde una sesión nueva que `role_permissions` quedó igual. Al terminar borra la empresa de prueba.
+
+## Operaciones y variables
+
+Todas están en `operaciones.graphql`. En GraphiQL se pega el archivo completo, se pegan las variables en el panel **Variables** y se elige la operación por nombre.
+
+| Caso | Operación | Variables |
 |---|---|---|
-| Ver los roles | `roles` | — |
-| Ver los permisos | `permissions` | — |
-| Ver la lista de un rol | `rolePermissions(roleId:)` | — |
-| Agregar un permiso a un rol | `assignPermissionToRole` | `roles.write` |
-| Quitar un permiso de un rol | `removePermissionFromRole` | `roles.write` |
-| Darle un rol a una persona | `assignRole` | `roles.write` |
-| Crear una cuenta | `createAccount` | `accounts.write` |
-| Registrar un movimiento | `createTransaction` (además pide el token de quien registra) | `transactions.write` |
+| E01 | `PuntoDePartida` | — |
+| E01, E08 | `ListaDelRol` | `variables/E01_lista_capturista.json` |
+| E02 | `ExplorarCatalogo` (alias y fragmento) | `variables/E02_actor.json` |
+| E02 | `CatalogoCompleto` | `variables/E02_actor.json` |
+| E02 | `CatalogoPorRecurso` | `variables/E02_resource_null.json`, `E02_resource_company_users.json`, `E02_resource_payments.json` (error) |
+| Investigación | `CompararPuestos` (alias y fragmento) | `variables/comparar_puestos.json` |
+| E03 | `RevisarConfiguracion` | `variables/S1_capturista.json` |
+| E04, E05 | `AplicarConfiguracion` | `variables/S1_capturista.json` |
+| E05, E09 | `AplicarConfiguracion` | `variables/S0_capturista.json` |
+| E06 | `RevisarConfiguracion` y `AplicarConfiguracion` | `variables/E06_*.json` (una por variante) |
+| E08 | `AplicarConfiguracion` | `variables/E08_lista_vacia.json` |
+| E10 | `CuentasDeLaEmpresa` | `variables/E10_cuentas.json` |
+| E10 | `RegistrarMovimiento` (+ encabezado `Authorization: Bearer <token>`) | `variables/E10_movimiento.json` |
 
-`actorCompanyUserId` es la membresía con la que se prueba, como en la actividad 3. El servidor no confía en el permiso que diga el cliente: busca el rol activo de esa membresía y lee su lista en `role_permissions`. Si la membresía es de otra empresa, `exigir_permiso` también la rechaza.
+Los id de los archivos de `variables/` son los de la base donde se corrió el script; en otra base se regeneran ejecutándolo.
 
-## Estructura
+## Archivos de la entrega
 
 ```
-app/                     código del sistema (sin cambios de lógica respecto a la actividad 3)
+app/                         código del sistema
+tests/test_e07_reversion.py  prueba E07
+README.md
+investigacion.md             cuatro respuestas con ejemplos y fuentes oficiales
+operaciones.graphql          operaciones con nombre
+variables/                   JSON de cada operación
+configuracion_inicial.json   matriz por códigos antes de programar
+configuracion_final.json     matriz por códigos al terminar (E09)
+comprobaciones.sql           consultas de verificación y preparación/restauración de E06
+evidencias.md                E01 a E10: precondición, operación, esperado, obtenido y regla
+evidencias/actividad5/       JSON, SQL, salida de E07 y capturas
 documentacion/
-  PRUEBAS_GRAPHQL.md     guía de capturas de la actividad 4
-  probar_actividad4.py   pruebas automáticas de la actividad 4
-  tomar_capturas.py      toma las capturas de GraphiQL y MySQL
-  ANALISIS.md            análisis del dominio
-  anteriores/            instrucciones, pruebas y script de la actividad 3 y de la unidad 1
-evidencias/
-  actividad4/            capturas, JSON de las pruebas y SELECT final
-  actividad3/            evidencias entregadas en la actividad 3
+  probar_actividad5.py       ejecuta E01 a E10
+  probar_actividad4.py, tomar_capturas.py, PRUEBAS_GRAPHQL.md, ANALISIS.md, anteriores/
+evidencias/actividad4/       evidencias de la actividad 4
 ```

@@ -1,0 +1,23 @@
+{
+  "operacion": "RevisarConfiguracion",
+  "variables": "variables/E06_rol_inexistente.json",
+  "respuesta": {
+    "data": {
+      "previewRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "El rol 999999 no existe.",
+        "locations": [
+          {
+            "line": 88,
+            "column": 3
+          }
+        ],
+        "path": [
+          "previewRolePermissions"
+        ]
+      }
+    ]
+  }
+}

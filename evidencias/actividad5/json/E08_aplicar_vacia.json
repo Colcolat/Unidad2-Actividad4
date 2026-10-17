@@ -1,0 +1,34 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E08_lista_vacia.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "activated": [],
+        "deactivated": [
+          {
+            "code": "accounts.read"
+          },
+          {
+            "code": "accounts.write"
+          },
+          {
+            "code": "concepts.read"
+          },
+          {
+            "code": "transactions.read"
+          },
+          {
+            "code": "transactions.write"
+          }
+        ],
+        "unchanged": [],
+        "finalCount": 0,
+        "changed": true
+      }
+    }
+  }
+}

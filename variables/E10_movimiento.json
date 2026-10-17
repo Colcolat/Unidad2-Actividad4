@@ -1,0 +1,10 @@
+{
+  "actor": "15",
+  "input": {
+    "accountId": "7",
+    "conceptId": "4",
+    "transactionType": "INCOME",
+    "amount": "350.00",
+    "shortDescription": "Venta de mostrador"
+  }
+}

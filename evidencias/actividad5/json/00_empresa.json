@@ -1,0 +1,11 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "createCompany": {
+        "id": "8",
+        "name": "Sistema General de Ingresos A5 0f4d9543"
+      }
+    }
+  }
+}

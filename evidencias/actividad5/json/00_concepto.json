@@ -1,0 +1,10 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "createConcept": {
+        "id": "4"
+      }
+    }
+  }
+}

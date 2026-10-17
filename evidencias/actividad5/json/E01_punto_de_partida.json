@@ -1,0 +1,86 @@
+{
+  "operacion": "PuntoDePartida",
+  "variables": null,
+  "respuesta": {
+    "data": {
+      "roles": [
+        {
+          "id": "1",
+          "code": "ADMINISTRADOR",
+          "name": "Administrador",
+          "isActive": true
+        },
+        {
+          "id": "2",
+          "code": "CONTADOR",
+          "name": "Contador",
+          "isActive": true
+        },
+        {
+          "id": "3",
+          "code": "CAPTURISTA",
+          "name": "Capturista",
+          "isActive": true
+        },
+        {
+          "id": "4",
+          "code": "CONSULTA",
+          "name": "Consulta",
+          "isActive": true
+        }
+      ],
+      "permissions": [
+        {
+          "id": "1",
+          "code": "company.users.read",
+          "isActive": true
+        },
+        {
+          "id": "2",
+          "code": "company.users.write",
+          "isActive": true
+        },
+        {
+          "id": "3",
+          "code": "accounts.read",
+          "isActive": true
+        },
+        {
+          "id": "4",
+          "code": "accounts.write",
+          "isActive": true
+        },
+        {
+          "id": "5",
+          "code": "concepts.read",
+          "isActive": true
+        },
+        {
+          "id": "6",
+          "code": "concepts.write",
+          "isActive": true
+        },
+        {
+          "id": "7",
+          "code": "transactions.read",
+          "isActive": true
+        },
+        {
+          "id": "8",
+          "code": "transactions.write",
+          "isActive": true
+        },
+        {
+          "id": "9",
+          "code": "roles.read",
+          "isActive": true
+        },
+        {
+          "id": "10",
+          "code": "roles.write",
+          "isActive": true
+        }
+      ]
+    }
+  }
+}

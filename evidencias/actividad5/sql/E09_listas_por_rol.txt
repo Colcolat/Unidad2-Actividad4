@@ -1,0 +1,13 @@
+mysql> SELECT r.code AS rol, COUNT(*) AS activos, GROUP_CONCAT(p.code ORDER BY p.code SEPARATOR ', ') AS permisos_activos
+FROM role_permissions rp JOIN roles r ON r.id = rp.role_id JOIN permissions p ON p.id = rp.permission_id
+WHERE rp.is_active = 1 AND p.is_active = 1
+GROUP BY r.code ORDER BY r.code;
++---------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| rol           | activos | permisos_activos                                                                                                                                                      |
++---------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ADMINISTRADOR | 10      | accounts.read, accounts.write, company.users.read, company.users.write, concepts.read, concepts.write, roles.read, roles.write, transactions.read, transactions.write |
+| CAPTURISTA    | 4       | accounts.read, concepts.read, transactions.read, transactions.write                                                                                                   |
+| CONSULTA      | 4       | accounts.read, company.users.read, concepts.read, transactions.read                                                                                                   |
+| CONTADOR      | 8       | accounts.read, accounts.write, company.users.read, concepts.read, concepts.write, roles.read, transactions.read, transactions.write                                   |
++---------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set

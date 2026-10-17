@@ -1,0 +1,5 @@
+mysql> SELECT role_id, permission_id, COUNT(*) AS repeticiones
+FROM role_permissions
+GROUP BY role_id, permission_id
+HAVING COUNT(*) > 1;
+Empty set

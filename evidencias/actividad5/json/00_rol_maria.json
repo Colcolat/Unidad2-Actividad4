@@ -1,0 +1,13 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "assignRole": {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "isActive": true
+      }
+    }
+  }
+}

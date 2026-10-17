@@ -1,0 +1,23 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E06_permiso_inactivo.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "Los permisos concepts.write están inactivos en el catálogo.",
+        "locations": [
+          {
+            "line": 109,
+            "column": 3
+          }
+        ],
+        "path": [
+          "setRolePermissions"
+        ]
+      }
+    ]
+  }
+}

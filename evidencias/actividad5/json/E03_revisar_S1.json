@@ -1,0 +1,48 @@
+{
+  "operacion": "RevisarConfiguracion",
+  "variables": "variables/S1_capturista.json",
+  "respuesta": {
+    "data": {
+      "previewRolePermissions": {
+        "role": {
+          "code": "CAPTURISTA"
+        },
+        "current": [
+          {
+            "code": "accounts.read"
+          },
+          {
+            "code": "concepts.read"
+          },
+          {
+            "code": "transactions.read"
+          },
+          {
+            "code": "transactions.write"
+          }
+        ],
+        "toActivate": [
+          {
+            "code": "accounts.write"
+          }
+        ],
+        "toDeactivate": [],
+        "unchanged": [
+          {
+            "code": "accounts.read"
+          },
+          {
+            "code": "concepts.read"
+          },
+          {
+            "code": "transactions.read"
+          },
+          {
+            "code": "transactions.write"
+          }
+        ],
+        "finalCount": 5
+      }
+    }
+  }
+}

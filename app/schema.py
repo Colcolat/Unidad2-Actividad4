@@ -15,7 +15,10 @@ from app.database import SessionLocal
 from app.models import Company, CompanyUser, User
 from app.financial_models import Account, AccountConcept, Concept, Transaction, utcnow as financial_utcnow
 from app.rbac_models import RoleModel, PermissionModel, RolePermissionModel, CompanyUserRoleModel
-from app.rbac import ROLE_NAMES, exigir_permiso, assign_role_internal
+from app.rbac import (
+    ROLE_NAMES, RESOURCE_PREFIXES, RolePermissionPlan, apply_role_permission_plan,
+    assign_role_internal, exigir_permiso, parse_id, plan_role_permissions,
+)
 from app.security import (
     create_access_token,
     decode_access_token,
@@ -539,6 +542,41 @@ class AssignRoleInput:
     role_id: strawberry.ID
 
 
+@strawberry.enum(name="PermissionResource")
+class PermissionResourceEnum(Enum):
+    COMPANY_USERS = "COMPANY_USERS"
+    ACCOUNTS = "ACCOUNTS"
+    CONCEPTS = "CONCEPTS"
+    TRANSACTIONS = "TRANSACTIONS"
+    ROLES = "ROLES"
+
+
+@strawberry.input(name="SetRolePermissionsInput")
+class SetRolePermissionsInput:
+    role_id: strawberry.ID
+    permission_ids: list[strawberry.ID]
+
+
+@strawberry.type(name="RolePermissionPlan")
+class RolePermissionPlanType:
+    role: RoleType
+    current: list[PermissionType]
+    to_activate: list[PermissionType]
+    to_deactivate: list[PermissionType]
+    unchanged: list[PermissionType]
+    final_count: int
+
+
+@strawberry.type(name="RolePermissionUpdate")
+class RolePermissionUpdateType:
+    role: RoleType
+    activated: list[PermissionType]
+    deactivated: list[PermissionType]
+    unchanged: list[PermissionType]
+    final_count: int
+    changed: bool
+
+
 def role_to_type(role: RoleModel) -> RoleType:
     return RoleType(id=strawberry.ID(str(role.id)), code=role.code, name=role.name, description=role.description, is_active=role.is_active)
 
@@ -553,6 +591,28 @@ def role_permission_to_type(relation: RolePermissionModel) -> RolePermissionType
 
 def company_user_role_to_type(relation: CompanyUserRoleModel) -> CompanyUserRoleType:
     return CompanyUserRoleType(id=strawberry.ID(str(relation.id)), company_user=company_user_to_type(relation.company_user), role=role_to_type(relation.role), is_active=relation.is_active)
+
+
+def plan_to_type(plan: RolePermissionPlan) -> RolePermissionPlanType:
+    return RolePermissionPlanType(
+        role=role_to_type(plan.role),
+        current=[permission_to_type(p) for p in plan.current],
+        to_activate=[permission_to_type(p) for p in plan.to_activate],
+        to_deactivate=[permission_to_type(p) for p in plan.to_deactivate],
+        unchanged=[permission_to_type(p) for p in plan.unchanged],
+        final_count=plan.final_count,
+    )
+
+
+def update_to_type(plan: RolePermissionPlan) -> RolePermissionUpdateType:
+    return RolePermissionUpdateType(
+        role=role_to_type(plan.role),
+        activated=[permission_to_type(p) for p in plan.to_activate],
+        deactivated=[permission_to_type(p) for p in plan.to_deactivate],
+        unchanged=[permission_to_type(p) for p in plan.unchanged],
+        final_count=plan.final_count,
+        changed=plan.changed,
+    )
 
 
 @strawberry.type
@@ -590,6 +650,29 @@ class Query:
                 RolePermissionModel.is_active.is_(True), PermissionModel.is_active.is_(True)
             ).order_by(RolePermissionModel.id)
             return [role_permission_to_type(item) for item in db.scalars(stmt).all()]
+
+    @strawberry.field
+    def permission_catalog(
+        self,
+        actor_company_user_id: strawberry.ID,
+        resource: Optional[PermissionResourceEnum] = None,
+    ) -> list[PermissionType]:
+        with SessionLocal() as db:
+            exigir_permiso(db, parse_id(actor_company_user_id, "La membresía"), "roles.read")
+            stmt = select(PermissionModel).where(PermissionModel.is_active.is_(True))
+            if resource is not None:
+                stmt = stmt.where(PermissionModel.code.startswith(RESOURCE_PREFIXES[resource.value], autoescape=True))
+            return [permission_to_type(item) for item in db.scalars(stmt.order_by(PermissionModel.code)).all()]
+
+    @strawberry.field
+    def preview_role_permissions(
+        self,
+        input: SetRolePermissionsInput,
+        actor_company_user_id: strawberry.ID,
+    ) -> Optional[RolePermissionPlanType]:
+        with SessionLocal() as db:
+            exigir_permiso(db, parse_id(actor_company_user_id, "La membresía"), "roles.read")
+            return plan_to_type(plan_role_permissions(db, input.role_id, input.permission_ids))
 
 
 
@@ -883,6 +966,28 @@ class Mutation:
             db.commit()
             db.refresh(assignment)
             return company_user_role_to_type(assignment)
+
+    @strawberry.mutation
+    def set_role_permissions(
+        self,
+        input: SetRolePermissionsInput,
+        actor_company_user_id: strawberry.ID,
+    ) -> Optional[RolePermissionUpdateType]:
+        with SessionLocal() as db:
+            exigir_permiso(db, parse_id(actor_company_user_id, "La membresía"), "roles.write")
+            # Se valida y calcula otra vez contra la base actual; la previsualización no reservó nada.
+            plan = plan_role_permissions(db, input.role_id, input.permission_ids)
+            result = update_to_type(plan)
+            try:
+                apply_role_permission_plan(db, plan)
+                db.commit()
+            except IntegrityError as exc:
+                db.rollback()
+                raise GraphQLError("No se pudo guardar la configuración; la lista anterior se conservó.") from exc
+            except Exception:
+                db.rollback()
+                raise
+            return result
 
 
 

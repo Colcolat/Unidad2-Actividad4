@@ -23,7 +23,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Unidad II - Actividad 4 - Configuración de permisos por rol",
+    title="Unidad II - Actividad 5 - Configurar permisos con GraphQL",
 
     description=(
         "Gestión de empresas, usuarios, cuentas, conceptos "
@@ -49,7 +49,7 @@ app.include_router(
 @app.get("/")
 def root():
     return {
-        "message": "Actividad 4 - Gestión financiera funcionando",
+        "message": "Actividad 5 - Gestión financiera funcionando",
         "graphql": "/graphql"
     }
 

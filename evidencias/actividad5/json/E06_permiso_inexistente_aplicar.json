@@ -1,0 +1,23 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E06_permiso_inexistente.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "Los permisos 999999 no existen.",
+        "locations": [
+          {
+            "line": 109,
+            "column": 3
+          }
+        ],
+        "path": [
+          "setRolePermissions"
+        ]
+      }
+    ]
+  }
+}

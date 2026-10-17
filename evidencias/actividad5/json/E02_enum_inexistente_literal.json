@@ -1,0 +1,17 @@
+{
+  "documento": "query CatalogoPagos { permissionCatalog(resource: PAYMENTS, actorCompanyUserId: \"14\") { code } }",
+  "respuesta": {
+    "data": null,
+    "errors": [
+      {
+        "message": "Value 'PAYMENTS' does not exist in 'PermissionResource' enum.",
+        "locations": [
+          {
+            "line": 1,
+            "column": 51
+          }
+        ]
+      }
+    ]
+  }
+}

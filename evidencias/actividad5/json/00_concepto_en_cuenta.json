@@ -1,0 +1,10 @@
+{
+  "operacion": "preparación",
+  "respuesta": {
+    "data": {
+      "assignConceptToAccount": {
+        "id": "4"
+      }
+    }
+  }
+}

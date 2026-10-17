@@ -1,0 +1,23 @@
+{
+  "operacion": "AplicarConfiguracion",
+  "variables": "variables/E06_administrador.json",
+  "respuesta": {
+    "data": {
+      "setRolePermissions": null
+    },
+    "errors": [
+      {
+        "message": "La lista del rol ADMINISTRADOR no se configura con esta operación.",
+        "locations": [
+          {
+            "line": 109,
+            "column": 3
+          }
+        ],
+        "path": [
+          "setRolePermissions"
+        ]
+      }
+    ]
+  }
+}
