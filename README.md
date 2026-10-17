@@ -10,11 +10,15 @@ La autenticación no cambia: `login` y el token siguen como en las actividades a
 
 ## Integrantes y aportaciones
 
-| Integrante | Aportación |
-|---|---|
-| _Nombre 1_ | _p. ej. contrato GraphQL y resolvers_ |
-| _Nombre 2_ | _p. ej. prueba E07 y comprobaciones SQL_ |
-| _Nombre 3_ | _p. ej. investigación y evidencias_ |
+Docente: Gimer Amilcar Cervera Evia · Fundamentos de Arquitectura de Software y Desarrollo Backend. Portada del equipo: [portada_equipo.pdf](portada_equipo.pdf).
+
+| Integrante | Matrícula | Aportación |
+|---|---|---|
+| Angel Abraham Lugo Saenz | SW2409052 | _por completar_ |
+| Juan Jose Zapata Buenfil | SW2509044 | _por completar_ |
+| Josue Enmanuel Poot Mateo | SW2509033 | _por completar_ |
+| Sergio Origion Huerta Martinez | SW2509012 | _por completar_ |
+| Diego Ramirez Magaña | SW2509051 | _por completar_ |
 
 ## Qué cambió en el código
 
@@ -135,6 +139,7 @@ Los id de los archivos de `variables/` son los de la base donde se corrió el sc
 app/                         código del sistema
 tests/test_e07_reversion.py  prueba E07
 README.md
+portada_equipo.pdf           integrantes y matrículas
 investigacion.md             cuatro respuestas con ejemplos y fuentes oficiales
 operaciones.graphql          operaciones con nombre
 variables/                   JSON de cada operación
